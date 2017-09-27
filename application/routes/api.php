@@ -17,6 +17,6 @@ Route::group(['prefix' => 'bands'], function () {
     Route::get('/', 'BandController@index');
     Route::get('/{band}', 'BandController@show');
     Route::post('/', 'BandController@store');
-    Route::put('/{band}', 'BandController@update');
+    Route::put('/{id}', 'BandController@update');
     Route::delete('/{band}', 'BandController@destroy');
 });

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Band;
+use App\Command\CreateBandCommand;
+use App\Command\UpdateBandCommand;
 use App\Http\Requests\StoreBand;
+use App\Http\Requests\UpdateBand;
+use App\Model\Band;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class BandController extends Controller
 {
@@ -32,10 +34,7 @@ class BandController extends Controller
      */
     public function store(StoreBand $request) : JsonResponse
     {
-        $band = new Band();
-
-        $band->name = $request->name;
-        $band->save();
+        $band = $this->execute(new CreateBandCommand($request->get('name')));
 
         return new JsonResponse($band, 201);
     }
@@ -54,14 +53,13 @@ class BandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request    $request
-     * @param  Band       $band
+     * @param  UpdateBand $request
+     * @param  int        $id
      * @return JsonResponse
      */
-    public function update(Request $request, Band $band) : JsonResponse
+    public function update(UpdateBand $request, int $id) : JsonResponse
     {
-        $band->name = $request->name;
-        $band->save();
+        $band = $this->execute(new UpdateBandCommand($id, $request->get('name')));
 
         return new JsonResponse($band, 200);
     }

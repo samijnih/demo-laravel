@@ -8,7 +8,10 @@ use Tests\TestCase;
 
 class BandTest extends TestCase
 {
-    public function testStore()
+    /**
+     * @test
+     */
+    public function store()
     {
         // Arrange
         $data = ['name' => 'Born Of Osiris'];
@@ -23,9 +26,10 @@ class BandTest extends TestCase
     }
 
     /**
-     * @depends testStore
+     * @test
+     * @depends store
      */
-    public function testIndex()
+    public function index()
     {
         // Arrange
         $data = [
@@ -48,9 +52,10 @@ class BandTest extends TestCase
     }
 
     /**
-     * @depends testIndex
+     * @test
+     * @depends index
      */
-    public function testShow()
+    public function show()
     {
         // Arrange
         $data = ['id' => 1, 'name' => 'Born Of Osiris'];
@@ -65,9 +70,10 @@ class BandTest extends TestCase
     }
 
     /**
-     * @depends testShow
+     * @test
+     * @depends show
      */
-    public function testUpdate()
+    public function update()
     {
         // Arrange
         $data = ['name' => 'Veil Of Maya'];
@@ -82,9 +88,10 @@ class BandTest extends TestCase
     }
 
     /**
-     * @depends testUpdate
+     * @test
+     * @depends update
      */
-    public function testDestroy()
+    public function destroy()
     {
         // Act
         $deleteResponse = $this->json('DELETE', "/api/bands/1");
